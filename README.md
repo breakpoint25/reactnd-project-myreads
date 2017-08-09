@@ -1,8 +1,17 @@
+git commit -am # MyReads: A Book Lending App
+
 This is the final assessment project for Udacity's Nanodegree React Fundamentals course.
 
-This project was initially created based on a started template provide by Udacity.
+This project was initially created based on a starter template providing CSS and basic HTML structure from Udacity. A backend API was also provided to communicate with a Backend Server from Udacity for book information and long term storage.
 
-This project uses a Backend Server from Udacity to provide data.
+React components were the created to provide book management between the user's current collection and search results. Allowing a user to add, remove, or change shelfs of books. These changes were also synced with backend API calls.
+
+Router was implemented to provide unique page links for seperate screens and track page history.
+
+[Project Rubric](https://review.udacity.com/#!/rubrics/918/viewvv)
+
+## Installation
+The application requires only `npm install` and `npm start` to get it installed and launched.
 
 ## Important
 

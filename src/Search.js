@@ -61,12 +61,12 @@ class Search extends React.Component {
       this.state.searchResults.length === 0
         ? <li key="no-results">No results</li>
         : this.state.searchResults.map(book => {
-            return (
-              <li key={book.id}>
-                <Book book={book} onShelfUpdate={this.props.onShelfUpdate} />
-              </li>
-            );
-          });
+          return (
+            <li key={book.id}>
+              <Book book={book} onShelfUpdate={this.props.onShelfUpdate} />
+            </li>
+          );
+        });
 
     return (
       <div className="search-books">

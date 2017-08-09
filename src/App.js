@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Search from './Search'
-import List from './List'
 import * as BooksAPI from './BooksAPI'
+import List from './List'
+import Search from './Search'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -11,8 +11,8 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then(
-      (books) => {
+    BooksAPI.getAll()
+      .then((books) => {
         this.setState({
           books
         })
@@ -25,7 +25,7 @@ class BooksApp extends React.Component {
 
     if (shelf === 'none') {
       updatedBooks.splice(index, 1) // remove book
-    } else if (book.shelf === 'none' ) {
+    } else if (book.shelf === 'none') {
       const updatedBook = { ...book, shelf }
       updatedBooks.push(updatedBook)
     } else {
@@ -33,13 +33,12 @@ class BooksApp extends React.Component {
       updatedBooks[index] = updatedBook // overwrite existing book
     }
 
-    BooksAPI.update(book, shelf).then(
-      () => {
+    BooksAPI.update(book, shelf)
+      .then(() => {
         this.setState({
           books: updatedBooks
         })
-      }
-    )
+      })
   }
 
   render() {

@@ -12,8 +12,8 @@ class Book extends React.Component {
   }
 
   render() {
-    const { book: { title } } = this.props
-    const authors = this.props.book.authors ? this.props.book.authors : []
+    //The below book details are not guaranteed, so setting fall backs
+    const authors = this.props.book.authors || []
     const thumbnail = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : ''
 
     const authorsList = authors.map((author) => {
@@ -40,7 +40,7 @@ class Book extends React.Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{title}</div>
+        <div className="book-title">{this.props.book.title}</div>
         <div className="book-authors">{authorsList}</div>
       </div>
     )
