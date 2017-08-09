@@ -39,6 +39,7 @@ class Search extends React.Component {
 
   handleChange = event => {
     const searchTerm = event.target.value;
+
     this.setState(
       {
         value: event.target.value,
@@ -56,14 +57,13 @@ class Search extends React.Component {
   };
 
   render() {
-    const { searchResults } = this.state;
     const booksList =
-      searchResults.length === 0
+      this.state.searchResults.length === 0
         ? <li key="no-results">No results</li>
-        : searchResults.map(book => {
+        : this.state.searchResults.map(book => {
             return (
               <li key={book.id}>
-                <Book book={book} />
+                <Book book={book} onShelfUpdate={this.props.onShelfUpdate} />
               </li>
             );
           });

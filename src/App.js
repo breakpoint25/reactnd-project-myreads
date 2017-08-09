@@ -11,11 +11,12 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then( (books) => {
-      this.setState({
-        books
+    BooksAPI.getAll().then(
+      (books) => {
+        this.setState({
+          books
+        })
       })
-    })
   }
 
   handleShelfUpdate = (book, shelf) => {
@@ -24,16 +25,21 @@ class BooksApp extends React.Component {
 
     if (shelf === 'none') {
       updatedBooks.splice(index, 1) // remove book
-      //TO DO - add update API code
+    } else if (book.shelf === 'none' ) {
+      const updatedBook = { ...book, shelf }
+      updatedBooks.push(updatedBook)
     } else {
-      const updatedBook = {...book, shelf} //update shelf location
+      const updatedBook = { ...book, shelf } //update shelf location
       updatedBooks[index] = updatedBook // overwrite existing book
-      //TO DO - add update API code
     }
 
-    this.setState({
-      books: updatedBooks
-    })
+    BooksAPI.update(book, shelf).then(
+      () => {
+        this.setState({
+          books: updatedBooks
+        })
+      }
+    )
   }
 
   render() {
@@ -45,7 +51,7 @@ class BooksApp extends React.Component {
               <List books={this.state.books} onShelfUpdate={this.handleShelfUpdate} />
             )} />
             <Route path='/search' render={() => (
-              <Search books={this.state.books} />
+              <Search books={this.state.books} onShelfUpdate={this.handleShelfUpdate} />
 
             )} />
           </Switch>
