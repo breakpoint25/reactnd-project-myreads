@@ -1,4 +1,4 @@
-git commit -am # MyReads: A Book Lending App
+# MyReads: A Book Lending App
 
 This is the final assessment project for Udacity's Nanodegree React Fundamentals course.
 
