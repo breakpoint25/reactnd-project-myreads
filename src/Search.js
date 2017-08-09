@@ -1,55 +1,79 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
-import Book from './Book'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
+import Book from './Book';
 
 class Search extends React.Component {
   state = {
     value: '',
-    searchResults: []
-  }
+    searchResults: [],
+  };
 
   searchBooks = () => {
-    BooksAPI.search(this.state.value, 20).then(
-      (searchResults) => {
-        searchResults.map((result) => {
-          const index = this.props.books.indexOf(result)
-          console.log(index)
-        })
+    BooksAPI.search(this.state.value, 20)
+      .then(searchResults => {
+        const newSearchResults = searchResults.map(result => {
+          const index = this.props.books.find(book => {
+            return book.id === result.id;
+          });
 
-        return searchResults
-      }
-    ).then(
-      (searchResults) => {
+          if (index !== undefined) {
+            return index;
+          } else {
+            return { ...result, shelf: 'none' };
+          }
+        });
+        return newSearchResults;
+      })
+      .then(searchResults => {
         this.setState({
-          searchResults
-        })
-      }
-    )
-  }
+          searchResults,
+        });
+      })
+      .catch(() => {
+        this.setState({
+          searchResults: [],
+        });
+      });
+  };
 
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value
-    }, this.searchBooks)
-  }
+  handleChange = event => {
+    const searchTerm = event.target.value;
+    this.setState(
+      {
+        value: event.target.value,
+      },
+      () => {
+        if (searchTerm !== '') {
+          this.searchBooks();
+        } else {
+          this.setState({
+            searchResults: [],
+          });
+        }
+      },
+    );
+  };
 
   render() {
-    const { searchResults } = this.state
-    console.log(searchResults)
-    const booksList = searchResults.length === 0 ?
-      <li key='empty'>Emptry</li> : searchResults.map((book) => {
-        return (
-          <li key={book.id}>
-            <Book book={book} />
-          </li>
-        )
-      })
+    const { searchResults } = this.state;
+    const booksList =
+      searchResults.length === 0
+        ? <li key="no-results">No results</li>
+        : searchResults.map(book => {
+            return (
+              <li key={book.id}>
+                <Book book={book} />
+              </li>
+            );
+          });
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className='close-search' to='/'>Close</Link>
+          <Link className="close-search" to="/">
+            Close
+          </Link>
           <div className="search-books-input-wrapper">
             {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -59,8 +83,12 @@ class Search extends React.Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-            <input type="text" onChange={this.handleChange} value={this.state.value} placeholder="Search by title or author" />
-
+            <input
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.value}
+              placeholder="Search by title or author"
+            />
           </div>
         </div>
         <div className="search-books-results">
@@ -69,8 +97,8 @@ class Search extends React.Component {
           </ol>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Search
+export default Search;

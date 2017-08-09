@@ -2,7 +2,7 @@ import React from 'react'
 
 class Book extends React.Component {
   state = {
-    value: this.props.book.shelf
+    value: this.props.book.shelf ? this.props.book.shelf : 'none'
   }
 
   handleChange = (event) => {
@@ -12,12 +12,10 @@ class Book extends React.Component {
   }
 
   render() {
-    // Nested destructuring with ES6
-    const {
-      book: { title, authors, imageLinks: { thumbnail } }
-    } = this.props
+    const { book: { title } } = this.props
+    const authors = this.props.book.authors ? this.props.book.authors : []
+    const thumbnail = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : ''
 
-    console.log(thumbnail)
     const authorsList = authors.map((author) => {
       return <div key={author}>{author}</div>
     })
@@ -34,7 +32,7 @@ class Book extends React.Component {
           </div>
           <div className="book-shelf-changer">
             <select value={this.state.value} onChange={this.handleChange}>
-              <option value="none" disabled>Move to...</option>
+              <option value="disabled" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
