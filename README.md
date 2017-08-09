@@ -8,7 +8,7 @@ React components were the created to provide book management between the user's 
 
 Router was implemented to provide unique page links for seperate screens and track page history.
 
-[Project Rubric](https://review.udacity.com/#!/rubrics/918/viewvv)
+[Project Rubric](https://review.udacity.com/#!/rubrics/918/view)
 
 ## Installation
 The application requires only `npm install` and `npm start` to get it installed and launched.
