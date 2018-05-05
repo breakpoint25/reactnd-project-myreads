@@ -43,7 +43,7 @@ class BooksApp extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
         <div className='app'>
           <Route exact path='/' render={() => (
             <List books={this.state.books} onShelfUpdate={this.handleShelfUpdate} />
