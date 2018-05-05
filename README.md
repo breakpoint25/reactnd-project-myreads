@@ -4,9 +4,9 @@ This is the final assessment project for Udacity's Nanodegree React Fundamentals
 
 This project was initially created based on a starter template providing CSS and basic HTML structure from Udacity. A backend API was also provided to communicate with a Backend Server from Udacity for book information and long term storage.
 
-React components were the created to provide book management between the user's current collection and search results. Allowing a user to add, remove, or change shelfs of books. These changes were also synced with backend API calls.
+React components were the created to provide book management between the user's current collection and search results. Allowing a user to add, remove, or change shelf of books. These changes were also synced with backend API calls.
 
-Router was implemented to provide unique page links for seperate screens and track page history.
+Router was implemented to provide unique page links for separate screens and track page history.
 
 [Project Rubric](https://review.udacity.com/#!/rubrics/918/view)
 
